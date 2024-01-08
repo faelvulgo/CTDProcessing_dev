@@ -32,8 +32,8 @@ binado.to_csv('path_mais_nome_do_arquivo.csv')
 # Exemplos
 Aqui está o exemplo de um arquivo de dados de CTD sem ter nenhum tipo de pré-processamento:
 
-![Perfil de dados brutos](https://github.com/faelvulgo/CTDprocessing/blob/master/venv/perfis/Perfil_bruto.png)
+![Perfil de dados brutos](https://github.com/faelvulgo/CTDprocessing/blob/master/perfis/Perfil_bruto.png)
 
 Podemos perceber diversos ruídos e laços de pressão, bem como dados indesejados acima da coluna d'água. Após o processamento utilizando a rotina, este é o resultado gerado para o mesmo arquivo de dados:
 
-![Perfil depois de todas as etapas de processamento](https://github.com/faelvulgo/CTDprocessing/blob/master/venv/perfis/Perfil_binado.png)
+![Perfil depois de todas as etapas de processamento](https://github.com/faelvulgo/CTDprocessing/blob/master/perfis/Perfil_binado.png)https://github.com/faelvulgo/CTDprocessing/blob/master/perfis/Perfil_binado.png
