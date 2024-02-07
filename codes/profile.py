@@ -2,7 +2,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
 
-data = pd.read_csv('/home/labdino/PycharmProjects/BioGeoQmc/perfis.csv')
+data = pd.read_csv('')
 
 
 x = data['NH']
