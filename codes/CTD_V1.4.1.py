@@ -154,7 +154,7 @@ class DataProcessor:
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         print(f"convert_decimal_separator_all_columns elapsed time: {elapsed_time} seconds")
-        '''
+        
         start_time = time.perf_counter()
         self.remove_outliers()
         end_time = time.perf_counter()
@@ -166,7 +166,7 @@ class DataProcessor:
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         print(f"remove_above_sea_level elapsed time: {elapsed_time} seconds")
-        '''
+        
         start_time = time.perf_counter()
         self.remove_pressure_reversals()
         end_time = time.perf_counter()
@@ -200,7 +200,7 @@ class DataProcessor:
 - Executa a função que executa as outras funções da classe passando o argumento sea_level_pressure
 - Salva os novos dados processados em um novo csv
 '''
-data = pd.read_csv('/home/labdino/PycharmProjects/CTDprocessing/venv/Dados/testepressurereversals')
+data = pd.read_csv('')
 processor = DataProcessor(data)
 data_processada = processor.process_data(10.12)
-data_processada.to_csv("/home/labdino/PycharmProjects/CTDprocessing/venv/dados_pós/data_processada.csv", index=False)
+data_processada.to_csv("", index=False)
