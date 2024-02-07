@@ -26,7 +26,7 @@ def remove_pressure_reversals(data):
 
 
 # read CTD data from CSV file using tab as delimiter
-data = pd.read_csv('/home/labdino/PycharmProjects/CTDprocessing/venv/FILE17V2.csv', delimiter='\t', decimal='.')
+data = pd.read_csv('', delimiter='\t', decimal='.')
 
 # remove outliers of the binned data
 outlier_removed_data = remove_outliers(data)
@@ -41,5 +41,5 @@ removed_reversals = remove_pressure_reversals(sea_level_removed_data)
 processed_data = removed_reversals
 
 # Save the data to a file
-processed_data.to_csv("/home/labdino/PycharmProjects/CTDprocessing/venv/processed_data.csv", index=False)
+processed_data.to_csv("", index=False)
 
