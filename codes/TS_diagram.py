@@ -5,7 +5,7 @@ import numpy as np
 from gsw import rho as gsw_rho
 
 # Abre os dados do csv como um dataframe Pandas
-data = pd.read_csv('/home/labdino/PycharmProjects/CTDprocessing/dados/01. Dados Brutos/04_radial_3/0656_30072019_2242/FILE57_binado.csv')
+data = pd.read_csv('')
 
 # Abre os dados do dataframe como array NumPy
 salinity = data['Calc. SALINITY; PSU'].values
@@ -52,7 +52,7 @@ cbar = plt.colorbar(scatter, ax=ax, label='Pressão (dBar)')
 plt.tight_layout()
 
 # Save the plot
-plt.savefig('/home/labdino/PycharmProjects/CTDprocessing/dados/01. Dados Brutos/04_radial_3/0656_30072019_2242/FILE57_TS.png', format='png', dpi=900, transparent=False)
+plt.savefig('', format='png', dpi=900, transparent=False)
 
 # Display the plot
 plt.show()
