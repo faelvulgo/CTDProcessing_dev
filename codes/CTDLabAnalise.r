@@ -5,10 +5,10 @@ library(ggplot2)
 
 # ---------- Acessando os dados ----------
 
-setwd("/home/labdino/Downloads")
+setwd("")
 getwd()
 
-df <-read.csv2("analise.csv", sep='\t')
+df <-read.csv2("", sep='\t')
 str(df)
 
 par(mfrow=c(2,2))
