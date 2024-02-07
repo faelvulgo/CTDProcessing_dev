@@ -81,7 +81,7 @@ def plot_ts_diagram(data):
 
 
 # read CTD data from CSV file using tab as delimiter
-data = pd.read_csv('/home/labdino/PycharmProjects/CTDprocessing/venv/FILE17V2.csv', delimiter='\t')
+data = pd.read_csv('', delimiter='\t')
 print(data.columns)
 
 # Assuming you have a DataFrame named 'data'
@@ -110,5 +110,5 @@ plot2 = plot_ts_diagram(data)
 processed_data = removed_reversals
 
 # Save the data to a file
-processed_data.to_csv("/home/labdino/PycharmProjects/CTDprocessing/venv/processed_data.csv", index=False)
+processed_data.to_csv("", index=False)
 
