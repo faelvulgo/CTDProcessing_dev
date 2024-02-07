@@ -32,7 +32,7 @@ def low_pass_filter(data, fs, cutoff, order=5, padlen=10):
     return filtered_data
 
 # read CTD data from CSV file using tab as delimiter
-data = pd.read_csv('/home/labdino/dados_exemplo_gpt', delimiter=',')
+data = pd.read_csv('', delimiter=',')
 
 # bin the data
 #binned_data = bin_data(data)
@@ -52,4 +52,4 @@ sea_level_removed_data = remove_above_sea_level(outlier_removed_data, 1012.0)
 processed_data = sea_level_removed_data
 
 # Save the data to a file
-processed_data.to_csv("/home/labdino/PycharmProjects/CTDprocessing/venv/processed_data.csv", index=False)
+processed_data.to_csv("", index=False)
