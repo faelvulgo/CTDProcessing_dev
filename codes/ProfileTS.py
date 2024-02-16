@@ -5,7 +5,7 @@ import pandas as pd
 # Função para ler o arquivo CSV e plotar o gráfico
 def plot_perfil_termosal(file_path):
     # Carregar o arquivo CSV usando pandas
-    df = pd.read_csv('/home/labdino/PycharmProjects/CTDprocessing/dados/01. Dados Brutos/04_radial_3/0656_30072019_2242/FILE57_binado.csv')
+    df = pd.read_csv('PATH')
 
     # Extrair colunas relevantes
     temperatura = df['TEMPERATURE;C']
@@ -50,10 +50,10 @@ def plot_perfil_termosal(file_path):
     fig.legend(loc='upper right', bbox_to_anchor=(1, 1))
 
     # Salvar o gráfico como imagem PNG
-    plt.savefig('/home/labdino/PycharmProjects/CTDprocessing/dados/01. Dados Brutos/04_radial_3/0656_30072019_2242/Perfil_TS_scale.png', format='png', dpi=900, transparent=False)
+    plt.savefig('PATH', format='png', dpi=900, transparent=False)
 
     # Exibir o gráfico
     plt.show()
 
 # Substitua 'caminho/do/seu/arquivo.csv' pelo caminho real do seu arquivo CSV
-plot_perfil_termosal('/home/labdino/PycharmProjects/CTDprocessing/dados/01. Dados Brutos/04_radial_3/0656_30072019_2242/FILE57_binado.csv')
+plot_perfil_termosal('PATH')
