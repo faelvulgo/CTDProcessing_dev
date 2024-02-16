@@ -70,7 +70,7 @@ def plot_ts_diagram(data):
 
 
 # read CTD data from CSV file using tab as delimiter
-data = pd.read_csv('', delimiter=',')
+data = pd.read_csv('PATH', delimiter=',')
 print(data.columns)
 
 # use upcast or downcast
@@ -96,5 +96,5 @@ plot2 = plot_ts_diagram(data)
 processed_data = removed_reversals
 
 # Save the data to a file
-processed_data.to_csv("", index=False)
+processed_data.to_csv("PATH", index=False)
 
