@@ -38,7 +38,7 @@ def lp_filter(df, sample_rate=24.0, time_constant=0.15):
 
 
 # read CTD data from CSV file using tab as delimiter
-data = pd.read_csv('', delimiter=',')
+data = pd.read_csv('PATH', delimiter=',')
 print(data.columns)
 
 # remove outliers of the binned data
@@ -57,5 +57,5 @@ filtered_data = lp_filter(removed_reversals, sample_rate=24.0, time_constant=0.1
 processed_data = filtered_data
 
 # Save the data to a file
-processed_data.to_csv("", index=False)
+processed_data.to_csv("PATH", index=False)
 
