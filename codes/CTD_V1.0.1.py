@@ -26,7 +26,7 @@ def remove_pressure_reversals(data):
 
 
 # read CTD data from CSV file using tab as delimiter
-data = pd.read_csv('', delimiter='\t', decimal='.')
+data = pd.read_csv('PATH', delimiter='\t', decimal='.')
 
 # remove outliers of the binned data
 outlier_removed_data = remove_outliers(data)
