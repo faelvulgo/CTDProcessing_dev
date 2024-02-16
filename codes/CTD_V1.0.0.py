@@ -32,7 +32,7 @@ def low_pass_filter(data, fs, cutoff, order=5, padlen=10):
     return filtered_data
 
 # read CTD data from CSV file using tab as delimiter
-data = pd.read_csv('', delimiter=',')
+data = pd.read_csv('PATH', delimiter=',')
 
 # bin the data
 #binned_data = bin_data(data)
