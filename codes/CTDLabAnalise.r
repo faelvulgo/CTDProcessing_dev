@@ -5,7 +5,7 @@ library(ggplot2)
 
 # ---------- Acessando os dados ----------
 
-setwd("")
+setwd("PATH")
 getwd()
 
 df <-read.csv2("", sep='\t')
