@@ -200,7 +200,7 @@ class DataProcessor:
 - Executa a função que executa as outras funções da classe passando o argumento sea_level_pressure
 - Salva os novos dados processados em um novo csv
 '''
-data = pd.read_csv('')
+data = pd.read_csv('PATH')
 processor = DataProcessor(data)
 data_processada = processor.process_data(10.12)
-data_processada.to_csv("", index=False)
+data_processada.to_csv("PATH", index=False)
