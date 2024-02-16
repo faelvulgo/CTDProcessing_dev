@@ -208,10 +208,10 @@ def plot_binned(data):
 - Plota o gráfico dos dados processados e binados
 - Salva os novos dados processados em um novo csv
 '''
-data = pd.read_csv('', delimiter='\t')
+data = pd.read_csv('PATH', delimiter='\t')
 processor = DataProcessor(data)
 data_processada = processor.process_data(10.12)
-data_processada.to_csv('')
+data_processada.to_csv('PATH')
 '''=================================================================================================================='''
 '''
 - Faz a binagem dos dados
@@ -231,5 +231,5 @@ end_time = time.perf_counter()
 elapsed_time = end_time - start_time
 print(f"plot binned elapsed time: {elapsed_time} seconds")
 
-binado.to_csv('')
+binado.to_csv('PATH')
 '''=================================================================================================================='''
