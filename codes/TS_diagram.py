@@ -5,7 +5,7 @@ import numpy as np
 from gsw import rho as gsw_rho
 
 # Abre os dados do csv como um dataframe Pandas
-data = pd.read_csv('')
+data = pd.read_csv('PATH')
 
 # Abre os dados do dataframe como array NumPy
 salinity = data['Calc. SALINITY; PSU'].values
@@ -52,7 +52,7 @@ cbar = plt.colorbar(scatter, ax=ax, label='Pressão (dBar)')
 plt.tight_layout()
 
 # Save the plot
-plt.savefig('', format='png', dpi=900, transparent=False)
+plt.savefig('PATH', format='png', dpi=900, transparent=False)
 
 # Display the plot
 plt.show()
