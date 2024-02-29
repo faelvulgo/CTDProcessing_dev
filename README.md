@@ -33,5 +33,5 @@ Podemos perceber diversos ruídos e laços de pressão, bem como dados indesejad
 
 ![Perfil depois de todas as etapas de processamento](https://github.com/faelvulgo/CTDprocessing/blob/master/perfis/Perfil_binado.png)https://github.com/faelvulgo/CTDprocessing/blob/master/perfis/Perfil_binado.png
 
-# Quick Guide em Jupyter Notebook
+# Quick Start Guide em Jupyter Notebook
 Para acessar um guia rápido das funções, está disponibilizado o Jupyter Notebook no repositório.
