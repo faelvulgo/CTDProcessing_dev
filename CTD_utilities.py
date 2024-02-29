@@ -117,7 +117,7 @@ def pressure_loops(data):
     print("Tamanho original:", len(data))
     print("Tamanho após remover loops de pressão:", len(data_sem_loops))
 
-def lp_filter(self, sample_rate=24.0, time_constant=0.15):
+def lp_filter(data, sample_rate, time_constant):
     """
     - Filtro passa-baixa
     - Recebe os valores de sample_rate e time_constant
@@ -125,9 +125,9 @@ def lp_filter(self, sample_rate=24.0, time_constant=0.15):
     wn = (1.0 / time_constant) / (sample_rate * 2.0)
     b, a = signal.butter(2, wn, "low")
     padlen = int(0.3 * sample_rate * time_constant)
-    new_df = self.data.copy()
-    new_df.index = signal.filtfilt(b, a, self.data.index.values, padtype='constant', padlen=padlen)
-    self.data = new_df
+    new_df = data.copy()
+    new_df.index = signal.filtfilt(b, a, data.index.values, padtype='constant', padlen=padlen)
+    data = new_df
 
 def bin_average(data, tamanho_janela, coluna, coluna2, lat):
     """
