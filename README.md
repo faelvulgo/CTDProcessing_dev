@@ -4,10 +4,10 @@
 
 # Descrição
 Este é um projeto desenvolvido por Rafael S. Bittencourt como inciação científica do Laboratório de Dinâmica Oceânica.
-O objetivo do projeto é uma rotina em Python para o pré-processamento de dados de CTD.
+O objetivo do projeto é um módulo em Python para o pré-processamento de dados de CTD.
 
 # Funcionalidades
-A rotina possui diversas funções para pré-processar os dados de CTD:
+O módulo possui diversas funções para pré-processar os dados de CTD:
  - normalizar os separadores dos dados;
  - seaparar o downcast do aparelho de CTD;
  - retirar spikes seguindo o método 3-sigma;
@@ -15,19 +15,14 @@ A rotina possui diversas funções para pré-processar os dados de CTD:
  - retirar dados medidos acima da coluna d'água;
  - aplicar um filtro passa-baixa;
  - binagem dos dados.
+ - diagrama T-S
 
-# Acesso à rotina
-Para utilizar a rotina só é preciso que baixe o arquivo python da versão mais recente disponível e altere os parãmetros pessoais do código: 
+# Acesso ao módulo
+Para utilizar a rotina só é preciso importar o arquivo CTD_utilities: 
 ```Python
-data = pd.read_csv('path_do_arquivo', delimiter='delimitador do seu arquivo', index_col=False)
+from CTD_utilities import *
 ```
-Certifique-se que as colunas de pressão, temperatura e salinidade tenham o nome 'pressure', 'temperature' e 'salinity' respectivamente.
-É necessário também alterar o path para o salvamento dos novos arquivos gerados, tanto os novos arquivos .csv quanto as imagens dos gráficos em .png:
-```Python
-plt.savefig("nome_do_arquivo.png", format='png', dpi=900, transparent=False)
-data_processada.to_csv('path_mais_nome_do_arquivo.csv')
-binado.to_csv('path_mais_nome_do_arquivo.csv')
-```
+As colunas de pressão, temperatura e salinidade devem ser nomeadas respectivamente como: PRESSURE;DBAR , TEMPERATURE;C , Calc. SALINITY; PSU 
 
 # Exemplos
 Aqui está o exemplo de um arquivo de dados de CTD sem ter nenhum tipo de pré-processamento:
@@ -37,3 +32,6 @@ Aqui está o exemplo de um arquivo de dados de CTD sem ter nenhum tipo de pré-p
 Podemos perceber diversos ruídos e laços de pressão, bem como dados indesejados acima da coluna d'água. Após o processamento utilizando a rotina, este é o resultado gerado para o mesmo arquivo de dados:
 
 ![Perfil depois de todas as etapas de processamento](https://github.com/faelvulgo/CTDprocessing/blob/master/perfis/Perfil_binado.png)https://github.com/faelvulgo/CTDprocessing/blob/master/perfis/Perfil_binado.png
+
+# Quick Guide em Jupyter Notebook
+Para acessar um guia rápido das funções, está disponibilizado o Jupyter Notebook no repositório.
