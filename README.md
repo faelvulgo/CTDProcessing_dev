@@ -1,6 +1,6 @@
 <h1 align="center"> CTD Processing </h1>
 
-![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=Versão&message=V.1.7.0&color=GREEN&style=for-the-badge)
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=Versão&message=V.1.7.10&color=GREEN&style=for-the-badge)
 
 # Descrição
 Este é um projeto desenvolvido por Rafael S. Bittencourt como inciação científica do Laboratório de Dinâmica Oceânica.
@@ -13,14 +13,17 @@ O módulo possui diversas funções para pré-processar os dados de CTD:
  - retirar spikes seguindo o método 3-sigma;
  - retirar loops de pressão;
  - retirar dados medidos acima da coluna d'água;
- - aplicar um filtro passa-baixa;
  - binagem dos dados.
  - diagrama T-S
+ - perfil de temperatura e salinidade sobrepostos
 
 # Acesso ao módulo
-Para utilizar a rotina só é preciso importar o arquivo CTD_utilities: 
+Para instalar o pacote:
+```pip install CTDProcessingPackage```
+
+Para utilizar a rotina só é preciso importar ctdmodule: 
 ```Python
-from CTD_utilities import *
+import ctdmodule as ctd
 ```
 As colunas de pressão, temperatura e salinidade devem ser nomeadas respectivamente como: PRESSURE;DBAR , TEMPERATURE;C , Calc. SALINITY; PSU 
 
