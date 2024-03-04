@@ -1,6 +1,6 @@
 <h1 align="center"> CTD Processing </h1>
 
-![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=Versão&message=V.1.7.10&color=GREEN&style=for-the-badge)
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=Versão&message=V.1.7.11&color=GREEN&style=for-the-badge)
 
 # Descrição
 Este é um projeto desenvolvido por Rafael S. Bittencourt como inciação científica do Laboratório de Dinâmica Oceânica.
