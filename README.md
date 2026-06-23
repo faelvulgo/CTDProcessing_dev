@@ -1,43 +1,43 @@
 <h1 align="center"> CTD Processing </h1>
 
-![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=Versão&message=v.1.10.0&color=GREEN&style=for-the-badge)
+![Development Badge](http://img.shields.io/static/v1?label=Version&message=v.1.10.0&color=GREEN&style=for-the-badge)
 
-# Descrição
-Este é um projeto desenvolvido por Rafael S. Bittencourt como inciação científica do Laboratório de Dinâmica Oceânica.
-O objetivo do projeto é um módulo em Python para o pré-processamento de dados de CTD.
+# Description
+This project was developed by Rafael S. Bittencourt as an undergraduate research project for the Ocean Dynamics Laboratory.
+The goal of this project is a Python module for CTD data pre-processing.
 
-# Funcionalidades
-O módulo possui diversas funções para pré-processar os dados de CTD:
- - normalizar os separadores dos dados;
- - seaparar o downcast do aparelho de CTD;
- - retirar spikes seguindo o método 3-sigma;
- - retirar loops de pressão;
- - retirar dados medidos acima da coluna d'água;
- - binagem dos dados.
- - diagrama T-S
- - perfil de temperatura e salinidade sobrepostos
+# Features
+The module includes several functions to pre-process CTD data:
+ - Normalize data separators;
+ - Separate the CTD downcast;
+ - Remove spikes using the 3-sigma method;
+ - Remove pressure loops;
+ - Remove data measured above the water column;
+ - Data binning;
+ - T-S diagram;
+ - Overlaid temperature and salinity profiles.
 
-# Acesso ao módulo
-Para instalar o pacote:
+# Module Access
+To install the package:
 ```pip install CTDProcessingPackage```
 
-Para utilizar a rotina só é preciso importar ctdmodule: 
-```Python
+To use the routine, you only need to import `ctdmodule`: 
+```python
 import ctdmodule as ctd
 ```
-As colunas de pressão, temperatura e salinidade devem ser nomeadas respectivamente como: PRESSURE;DBAR , TEMPERATURE;C , Calc. SALINITY; PSU 
+The pressure, temperature, and salinity columns must be named respectively as: `PRESSURE;DBAR` , `TEMPERATURE;C` , `Calc. SALINITY; PSU` 
 
-# Exemplos
-Aqui está o exemplo de um arquivo de dados de CTD sem ter nenhum tipo de pré-processamento:
+# Examples
+Here is an example of a CTD data file without any kind of pre-processing:
 
-![Perfil de dados brutos](https://github.com/faelvulgo/CTDprocessing/blob/master/perfis/Perfil_bruto.png)
+![Raw data profile](https://github.com/faelvulgo/CTDprocessing/blob/master/perfis/Perfil_bruto.png)
 
-Podemos perceber diversos ruídos e laços de pressão, bem como dados indesejados acima da coluna d'água. Após o processamento utilizando a rotina, este é o resultado gerado para o mesmo arquivo de dados:
+Several noises and pressure loops can be observed, as well as unwanted data above the water column. After processing using the routine, this is the result generated for the same data file:
 
-![Perfil depois de todas as etapas de processamento](https://github.com/faelvulgo/CTDprocessing/blob/master/perfis/Perfil_binado.png)https://github.com/faelvulgo/CTDprocessing/blob/master/perfis/Perfil_binado.png
+![Profile after all processing steps](https://github.com/faelvulgo/CTDprocessing/blob/master/perfis/Perfil_binado.png)
 
-# Quick Start Guide em Jupyter Notebook
-Para acessar um guia rápido das funções, está disponibilizado o Jupyter Notebook no repositório.
+# Jupyter Notebook Quick Start Guide
+To access a quick guide for the functions, a Jupyter Notebook is available in the repository.
 
 ## License
 
