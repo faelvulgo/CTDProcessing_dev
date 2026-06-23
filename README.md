@@ -38,3 +38,11 @@ Podemos perceber diversos ruídos e laços de pressão, bem como dados indesejad
 
 # Quick Start Guide em Jupyter Notebook
 Para acessar um guia rápido das funções, está disponibilizado o Jupyter Notebook no repositório.
+
+## License
+
+This project is proprietary software. You are welcome to download and use the code strictly for **personal and private purposes**. 
+
+However, commercial use, modification for public distribution, and direct redistribution of the source code are **strictly prohibited**. Any sharing must be done by linking directly to this original repository.
+
+For full legal terms, please refer to the [LICENSE](LICENSE) file.
