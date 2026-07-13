@@ -1,12 +1,3 @@
-"""
-Pacotes utilizados:
-    - Pandas
-    - Numpy
-    - Scipy
-    - Matplotlib
-    - Re
-    - Time
-"""
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,8 +7,8 @@ from gsw import rho as gsw_rho
 
 def convert_date_time(data):
     """
-    - Converte a coluna 'Date / Time' para datetime
-    - Cria colunas separadas para 'Date' e 'Time'
+    Converte a coluna 'Date / Time' para datetime
+    Cria colunas separadas para 'Date' e 'Time'
     """
     data['Date / Time'] = pd.to_datetime(data['Date / Time'], format='%d/%m/%Y %H:%M:%S')
     data['Date'] = data['Date / Time'].dt.date
@@ -45,7 +36,7 @@ def convert(data):
 
 def downcast(data):
     """
-    - Identifica o maior valor de pressão e mantém apenas as linhas antes desse valor.
+    Identifica o maior valor de pressão e mantém apenas as linhas antes desse valor.
     """
     # Encontra o índice do maior valor de pressão
     idx_max_pressure = data['PRESSURE;DBAR'].idxmax()
@@ -59,10 +50,10 @@ def downcast(data):
 
 def remove_outliers(data):
     """
-    - Faz a média dos dados,
-    - O desvio padrão,
-    - Cria uma máscara que irá conter os valores que forem maiores ou menores que a média mais três desvios-padrão,
-    - Retira a máscara dos dados.
+    Faz a média dos dados,
+    O desvio padrão,
+    Cria uma máscara que irá conter os valores que forem maiores ou menores que a média mais três desvios-padrão,
+    Retira a máscara dos dados.
     """
     mean = data.mean()
     std = data.std()
@@ -73,24 +64,24 @@ def remove_outliers(data):
     print('Desvio padrão de cada coluna dos dados: ' + str(std))
     print('3-sigma para cada coluna de dados: ' + str(mean + 3 * std))
 
-    return data  # Return the DataFrame with outliers removed
+    return data
 
 def above_sea_level(data, sea_level_pressure):
     """
-    - Recebe o argumento 'sea_level_pressure', que deve ser 10.12 dbar
-    - Converte a coluna da pressão para 'float',
-    - Mantém os valores que sejam maior do que sea_level_pressure
+    Recebe o argumento 'sea_level_pressure', que deve ser 10.12 dbar
+    Converte a coluna da pressão para 'float',
+    Mantém os valores que sejam maior do que sea_level_pressure
     """
     data['PRESSURE;DBAR'] = data['PRESSURE;DBAR'].astype(float)
 
-    return data[data['PRESSURE;DBAR'] > sea_level_pressure]  # Return filtered DataFrame
+    return data[data['PRESSURE;DBAR'] > sea_level_pressure]
 
 def pressure_loops(data):
     """
     Remove as linhas onde ocorrem pressure loops
     """
 
-    # Arredonde os valores de pressão para uma precisão específica (por exemplo, 2 casas decimais)
+    # Arredonda os valores de pressão para uma precisão específica (por exemplo, 2 casas decimais)
     data['PRESSURE;DBAR'] = data['PRESSURE;DBAR'].round(2)
     indices_loops = []
     for i in range(1, len(data['PRESSURE;DBAR'])):
@@ -99,13 +90,13 @@ def pressure_loops(data):
 
     print("Índices de loops de pressão identificados:", indices_loops)
 
-    # Remover linhas onde ocorrem pressure loops
+    # Remove linhas onde ocorrem pressure loops
     data_sem_loops = data.drop(indices_loops).reset_index(drop=True)
 
     print("Tamanho original:", len(data))
     print("Tamanho após remover loops de pressão:", len(data_sem_loops))
 
-    return data_sem_loops  # Return the DataFrame without pressure loops
+    return data_sem_loops
 
 '''
 def lp_filter(data, sample_rate=24.0, time_constant=0.15):
@@ -124,54 +115,50 @@ def lp_filter(data, sample_rate=24.0, time_constant=0.15):
 
 def bin_average(data, tamanho_janela, coluna, coluna2, lat):
     """
-    :param data: fonte do dado
-    :param tamanho_janela: tamanho dos bins
-    :param coluna: qual coluna para calcular a média
-    :return: retorna um dataframe com os resultados
+    Organiza os dados em bins usando o average.
     """
-    # Inicialize listas para armazenar os resultados
+    # Inicializa listas para armazenar os resultados
     profundidade = []
     pressure = []
     temperature = []
     salinity = []
     time_bin_avg = []
 
-    # Use .loc to ensure you are modifying the original DataFrame
     data.loc[:, 'z'] = gsw.conversions.z_from_p(data['PRESSURE;DBAR'], lat)
     data.loc[:, 'z'] = abs(data['z'])
 
     # Iteração de 'tamanho_janela' em 'tamanho_janela' linhas até o final do DataFrame
     for i in range(0, len(data), tamanho_janela):
-        # Verifique se o índice é válido para evitar "IndexError"
+        # Verifica se o índice é válido para evitar "IndexError"
         if i + tamanho_janela - 1 < len(data):
-            # Pegue os dados da coluna da janela especificada
+            # Pega os dados da coluna da janela especificada
             dados_janela = data[coluna].iloc[i:i + tamanho_janela]
             dados_janela2 = data[coluna2].iloc[i:i + tamanho_janela]
             dados_janela3 = data['PRESSURE;DBAR'].iloc[i:i + tamanho_janela]  # Pressure column
             dados_janela_time = data['Time'].iloc[i:i + tamanho_janela]  # Time column
 
-            # Converta os dados para o formato numérico, substituindo ',' por '.'
+            # Converte os dados para o formato numérico, substituindo ',' por '.'
             dados_janela = dados_janela.astype(str).str.replace(',', '.').astype(float)
             dados_janela2 = dados_janela2.astype(str).str.replace(',', '.').astype(float)
             dados_janela3 = dados_janela3.astype(float)
 
-            # Calcule a média dos dados das colunas da janela
+            # Calcula a média dos dados das colunas da janela
             media_dados = np.mean(dados_janela)
             media_final = round(media_dados, 2)
             media_dados2 = np.mean(dados_janela2)
             media_final2 = round(media_dados2, 2)
 
-            # Calcule a média entre o primeiro e o último valor da janela apenas para a coluna da profundidade
+            # Calcula a média entre o primeiro e o último valor da janela apenas para a coluna da profundidade
             media_primeiro_ultimo = np.mean([data['z'].iloc[i], data['z'].iloc[i + tamanho_janela - 1]])
             media_primeiro_ultimo_final = round(media_primeiro_ultimo, 2)
 
-            # Adicione os resultados às listas
+            # Adiciona os resultados às listas
             profundidade.append(media_primeiro_ultimo_final)
             pressure.append(dados_janela3.iloc[0])  # Include pressure value
             temperature.append(media_final)
             salinity.append(media_final2)
 
-            # Calculate average time in seconds
+            # Calcula o tempo médio
             time_bin_avg.append(np.mean([t.hour * 3600 + t.minute * 60 + t.second for t in dados_janela_time]))
 
     # Crie um DataFrame com os resultados
@@ -186,56 +173,62 @@ def bin_average(data, tamanho_janela, coluna, coluna2, lat):
     return results_df
 
 def plot_perfil_termosal(data, path):
+    """
+    Monta um perfil de temperatura e salinidade na mesma figura
+    """
 
-    # Extrair colunas relevantes
+    # Extrai colunas relevantes
     temperatura = data['TEMPERATURE;C']
     salinidade = data['Calc. SALINITY; PSU']
     pressao = data['PRESSURE;DBAR']
 
-    # Criar o gráfico com dois eixos x
+    # Cria o gráfico com dois eixos x
     fig, ax1 = plt.subplots(figsize=(10, 6))
 
-    # Plotar Temperatura no primeiro eixo x e pressão no y
+    # Plota Temperatura no primeiro eixo x e pressão no y
     ax1.set_xlabel('Temperatura', color='tab:blue')
     ax1.set_ylabel('Pressão', color='tab:blue')
     ax1.plot(temperatura, pressao, color='tab:blue', label='Temperatura')
     #ax1.set_xlim([0, 25])
     #ax1.set_ylim([0, 2750])
 
-    # Configurar os parâmetros do eixo x
+    # Configura os parâmetros do eixo x
     ax1.tick_params(axis='x', labelcolor='tab:blue')
 
-    # Criar o segundo eixo x para a Salinidade
+    # Cria o segundo eixo x para a Salinidade
     ax2 = ax1.twiny()
     ax2.set_xlabel('Salinidade', color='tab:orange')
     ax2.plot(salinidade, pressao, color='tab:orange', label='Salinidade')
     #ax2.set_xlim([34, 37.5])
 
-    # Configurar os parâmetros do eixo x do segundo gráfico
+    # Configura os parâmetros do eixo x do segundo gráfico
     ax2.tick_params(axis='x', labelcolor='tab:orange')
 
-    # Inverter o eixo y
+    # Inverte o eixo y
     ax1.invert_yaxis()
 
-    # Configurar o título do gráfico
+    # Configura o título do gráfico
     plt.title('Perfil de Temperatura e Salinidade Bruto - bin 20')
 
-    # Configurar o rótulo do eixo y
+    # Configura o rótulo do eixo y
     plt.ylabel('Pressão')
 
-    # Ajustar o layout do gráfico
+    # Ajusta o layout do gráfico
     fig.tight_layout()
 
-    # Adicionar legenda ao gráfico
+    # Adiciona legenda ao gráfico
     fig.legend(loc='upper right', bbox_to_anchor=(1, 1))
 
-    # Salvar o gráfico como imagem PNG
+    # Salva o gráfico como imagem PNG
     plt.savefig(path, format='png', dpi=900, transparent=False)
 
-    # Exibir o gráfico
+    # Exibe o gráfico
     plt.show()
 
 def diagramats(data, path, lon, lat):
+    """
+    Monta um diagrama T-S simples
+    """
     # Abre os dados do dataframe como array NumPy
     salinity = data['Calc. SALINITY; PSU'].values
     temperature = data['TEMPERATURE;C'].values
@@ -291,7 +284,7 @@ def diagramats(data, path, lon, lat):
 
 def plot(data, path):
     """
-    - Monta um perfil simples de temperatura
+    Monta um perfil simples de temperatura
     """
     pressure = data['PRESSURE;DBAR']
     temperature = data['TEMPERATURE;C']
