@@ -6,38 +6,40 @@ import pandas as pd
 
 
 class Processing:
-    """A class to handle processing of RSK files."""
+    """
+    A class to handle processing of RSK files.
+    """
 
     def __init__(self, rsk_file_path):
         """
         Initializes Processing class with an RSK file path.
-
-        Parameters:
-        - rsk_file_path (str): Path to the RSK file.
         """
         self.rsk = RSK(rsk_file_path)
 
     def open_file(self):
-        """Opens the RSK file."""
+        """
+        Opens the RSK file.
+        """
         print('Opening file...')
         self.rsk.open()
 
     def read_data(self):
-        """Reads data from the RSK file."""
+        """
+        Reads data from the RSK file.
+        """
         print('Reading data...')
         self.rsk.readdata()
 
     def close_file(self):
-        """Closes the RSK file."""
+        """
+        Closes the RSK file.
+        """
         print('Closing file...')
         self.rsk.close()
 
     def despike(self, channels):
         """
         Despikes specified channels in the RSK file.
-
-        Parameters:
-        - channels (list): List of channel names to despike.
         """
         print('Despiking...')
         for channel in channels:
@@ -46,39 +48,40 @@ class Processing:
     def rsktocsv(self, direction, outputdir):
         """
         Converts RSK file to CSV.
-
-        Parameters:
-        - direction (str): Direction of the conversion.
-        - outputdir (str): Output directory for the converted CSV file.
         """
         print('Converting RSK to csv...')
         self.rsk.RSK2CSV(direction=direction, outputDir=outputdir)
 
 
 class Calculations:
-    """A class to handle calculations on RSK data."""
+    """
+    A class to handle calculations on RSK data.
+    """
 
     def __init__(self, rsk_object):
         """
         Initializes Calculations class with an RSK object.
-
-        Parameters:
-        - rsk_object: RSK object to perform calculations on.
         """
         self.rsk = rsk_object
 
     def deriveseapressure(self):
-        """Derives sea pressure from the RSK data."""
+        """
+        Derives sea pressure from the RSK data.
+        """
         print('Deriving sea pressure...')
         self.rsk.deriveseapressure()
 
     def derivesalinity(self):
-        """Derives salinity from the RSK data."""
+        """
+        Derives salinity from the RSK data.
+        """
         print('Deriving salinity...')
         self.rsk.derivesalinity()
 
     def derivedepth(self):
-        """Derives depth from the RSK data."""
+        """
+        Derives depth from the RSK data.
+        """
         print('Deriving depth...')
         self.rsk.derivedepth()
 
@@ -87,12 +90,6 @@ class Calculations:
         """
         Rounds the numerical values in a DataFrame to 3 decimal places,
         including the first column and adding the first row back as the header.
-
-        Parameters:
-        - df (DataFrame): DataFrame containing numerical values to be rounded.
-
-        Returns:
-        - rounded_df (DataFrame): DataFrame with rounded numerical values.
         """
         print('Rounding numerical values...')
 
@@ -120,15 +117,6 @@ class Calculations:
 def time_step(step_name, func, *args, **kwargs):
     """
     Times the execution of a given function.
-
-    Parameters:
-    - step_name (str): Name of the step.
-    - func (function): Function to be executed.
-    - *args: Variable length argument list for the function.
-    - **kwargs: Arbitrary keyword arguments for the function.
-
-    Returns:
-    - result: Result returned by the function.
     """
     start_time = time.time()
     result = func(*args, **kwargs)
@@ -139,7 +127,7 @@ def time_step(step_name, func, *args, **kwargs):
 
 
 def main():
-    rsk_file_path = "/home/labdino/PycharmProjects/Internal_waves/dados/Cruzeiro_2/01.BoiadeTopo-75m/200428_20200227_2329.rsk"
+    rsk_file_path = "PATH"
 
     processing = Processing(rsk_file_path)
     calculations = Calculations(processing.rsk)
@@ -150,18 +138,15 @@ def main():
     time_step('Deriving sea pressure', calculations.deriveseapressure)
     time_step('Deriving salinity', calculations.derivesalinity)
     time_step('Deriving depth', calculations.derivedepth)
-    '''
-    # Time despiking step
     time_step('Despiking', processing.despike,
               ['temperature', 'conductivity', 'pressure', 'sea_pressure', 'salinity', 'depth'])
-    '''
 
-    outputdir = '/home/labdino/PycharmProjects/Internal_waves/dados/Cruzeiro_2/01.BoiadeTopo-75m'
+    outputdir = 'PATH'
     # Convert the RSK file to a csv file
     time_step('Converting', processing.rsktocsv, 'down', outputdir)
 
     # Specify the CSV file path
-    csv_file_path = '/home/labdino/PycharmProjects/Internal_waves/dados/Cruzeiro_2/01.BoiadeTopo-75m/200428_20200227_2329.csv'
+    csv_file_path = 'PATH'
 
     # Read the data from the CSV file
     print('Reading csv...')
