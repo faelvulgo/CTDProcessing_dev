@@ -7,38 +7,40 @@ import datetime
 
 
 class Processing:
-    """A class to handle processing of RSK files."""
+    """
+    A class to handle processing of RSK files.
+    """
 
     def __init__(self, rsk_file_path):
         """
         Initializes Processing class with an RSK file path.
-
-        Parameters:
-        - rsk_file_path (str): Path to the RSK file.
         """
         self.rsk = RSK(rsk_file_path)
 
     def open_file(self):
-        """Opens the RSK file."""
+        """
+        Opens the RSK file.
+        """
         print('Opening file...')
         self.rsk.open()
 
     def read_data(self):
-        """Reads data from the RSK file."""
+        """
+        Reads data from the RSK file.
+        """
         print('Reading data...')
         self.rsk.readdata()
 
     def close_file(self):
-        """Closes the RSK file."""
+        """
+        Closes the RSK file.
+        """
         print('Closing file...')
         self.rsk.close()
 
     def despike(self, channels):
         """
         Despikes specified channels in the RSK file.
-
-        Parameters:
-        - channels (list): List of channel names to despike.
         """
         print('Despiking...')
         for channel in channels:
@@ -47,44 +49,47 @@ class Processing:
     def rsktocsv(self, direction, outputdir):
         """
         Converts RSK file to CSV.
-
-        Parameters:
-        - direction (str): Direction of the conversion.
-        - outputdir (str): Output directory for the converted CSV file.
         """
         print('Converting RSK to csv...')
         self.rsk.RSK2CSV(direction=direction, outputDir=outputdir)
 
 
 class Calculations:
-    """A class to handle calculations on RSK data."""
+    """
+    A class to handle calculations on RSK data.
+    """
 
     def __init__(self, rsk_object):
         """
         Initializes Calculations class with an RSK object.
-
-        Parameters:
-        - rsk_object: RSK object to perform calculations on.
         """
         self.rsk = rsk_object
 
     def deriveseapressure(self):
-        """Derives sea pressure from the RSK data."""
+        """
+        Derives sea pressure from the RSK data.
+        """
         print('Deriving sea pressure...')
         self.rsk.deriveseapressure()
 
     def derivesalinity(self):
-        """Derives salinity from the RSK data."""
+        """
+        Derives salinity from the RSK data.
+        """
         print('Deriving salinity...')
         self.rsk.derivesalinity()
 
     def derivedepth(self):
-        """Derives depth from the RSK data."""
+        """
+        Derives depth from the RSK data.
+        """
         print('Deriving depth...')
         self.rsk.derivedepth()
 
     def derivedensity(self):
-        """Derive density from the RSK data."""
+        """
+        Derive density from the RSK data.
+        """
         print('Deriving density...')
         self.rsk.derivesigma()
 
@@ -93,12 +98,6 @@ class Calculations:
         """
         Rounds the numerical values in a DataFrame to 3 decimal places,
         including the first column and adding the first row back as the header.
-
-        Parameters:
-        - df (DataFrame): DataFrame containing numerical values to be rounded.
-
-        Returns:
-        - rounded_df (DataFrame): DataFrame with rounded numerical values.
         """
         print('Rounding numerical values...')
 
@@ -123,7 +122,9 @@ class Calculations:
 
 
 class Utilities:
-    """A class to handle utility functions."""
+    """
+    A class to handle utility functions.
+    """
 
     def __init__(self):
         self.stop_animation = False  # Flag to signal animation thread to stop
@@ -132,15 +133,6 @@ class Utilities:
     def time_step(step_name, func, *args, **kwargs):
         """
         Times the execution of a given function.
-
-        Parameters:
-        - step_name (str): Name of the step.
-        - func (function): Function to be executed.
-        - *args: Variable length argument list for the function.
-        - **kwargs: Arbitrary keyword arguments for the function.
-
-        Returns:
-        - result: Result returned by the function.
         """
         start_time = datetime.datetime.now()
         result = func(*args, **kwargs)
@@ -150,7 +142,9 @@ class Utilities:
         return result
 
     def animate_loading(self):
-        """Function to animate loading."""
+        """
+        Function to animate loading.
+        """
         while not self.stop_animation:  # Check flag to continue animation
             for char in '|/-\\':
                 print(' Processing ' + char, end='\r')
@@ -158,18 +152,15 @@ class Utilities:
         print('\nProcessing complete.')  # Print completion message when animation stops
 
     def stop_animation_thread(self):
-        """Function to stop the animation thread."""
+        """
+        Function to stop the animation thread.
+        """
         self.stop_animation = True
 
 
 def main(rsk_file_path, csv_file_path, outputdir):
     """
     Main function to process RSK data and round CSV values.
-
-    Parameters:
-    - rsk_file_path (str): Path to the RSK file.
-    - csv_file_path (str): Path to the CSV file.
-    - outputdir (str): Output directory for the converted CSV file.
     """
     # Call the classes
     processing = Processing(rsk_file_path)
@@ -183,15 +174,14 @@ def main(rsk_file_path, csv_file_path, outputdir):
     # Time and execute the open and read function
     utilities.time_step('Opening file', processing.open_file)
     utilities.time_step('Reading data', processing.read_data)
-    '''
+    
     # Time and execute the calculations steps
     utilities.time_step('Deriving sea pressure', calculations.deriveseapressure)
     utilities.time_step('Deriving salinity', calculations.derivesalinity)
     utilities.time_step('Deriving depth', calculations.derivedepth)
-    # utilities.time_step('Deriving density', calculations.derivedensity())
-    '''
+    utilities.time_step('Deriving density', calculations.derivedensity())
+    
     # Time and execute the despiking steps
-
     utilities.time_step('Despiking', processing.despike,
                         ['temperature'])
 
