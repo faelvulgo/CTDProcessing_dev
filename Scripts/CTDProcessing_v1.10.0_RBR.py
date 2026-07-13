@@ -1,13 +1,3 @@
-"""=================================================================================================================="""
-"""
-Packages used:
-    - Pandas
-    - Numpy
-    - Scipy
-    - Matplotlib
-    - Re
-    - Time
-"""
 import pandas as pd
 import numpy as np
 from scipy import signal
@@ -15,17 +5,18 @@ import matplotlib.pyplot as plt
 import re
 import time
 import gsw
-"""=================================================================================================================="""
 
 
 class Plotter:
-
+    """
+    Plotters class with a function that makes a temperature over time plot.
+    """
     def __init__(self, data):
         self.data = data
 
     def plot(self):
         """
-        - Builds a diagram
+        Builds a temperature over time plot.
         """
         day = self.data['Date']
         temperature = self.data['temperature(°C)']
@@ -62,9 +53,7 @@ class Plotter:
 class Processing:
     """
     Data processor class:
-
-    - Uses the 'data' argument, which will be the file for processing.
-    - Functions: - convert_decimal_separator_all_columns: converts the decimal separator;
+    With Functions: - convert_decimal_separator_all_columns: converts the decimal separator;
                  - remove_outliers: removes spikes using the 3-sigma method;
                  - remove_above_sea_level: removes data measured above sea level (10.12 dbar);
                  - remove_pressure_reversals: removes pressure reversals;
@@ -78,8 +67,8 @@ class Processing:
 
     def convert_date_time(self):
         """
-        - Converts the 'Date / Time' column to datetime
-        - Creates separate columns for 'Date' and 'Time'
+        Converts the 'Date / Time' column to datetime
+        Creates separate columns for 'Date' and 'Time'
         """
         self.data['timestamp(yyyy-mm-ddTHH:MM:ss.FFF)'] = pd.to_datetime(
             self.data['timestamp(yyyy-mm-ddTHH:MM:ss.FFF)'], format='%Y-%m-%dT%H:%M:%S.%f')
@@ -105,7 +94,7 @@ class Processing:
 
     def downcast(self):
         """
-        - Identifies the highest pressure value and keeps only the rows before that value.
+        Identifies the highest pressure value and keeps only the rows before that value.
         """
         # Find the index of the highest pressure value
         idx_max_pressure = self.data['pressure(dbar)'].idxmax()
@@ -122,9 +111,9 @@ class Processing:
 
     def remove_outliers(self):
         """
-        - Calculate the mean and standard deviation for each column
-        - Create a mask to identify outliers based on mean and standard deviation
-        - Remove outliers from the DataFrame
+        Calculate the mean and standard deviation for each column
+        Create a mask to identify outliers based on mean and standard deviation
+        Remove outliers from the DataFrame
         """
         # Select numeric columns only
         numeric_data = self.data.select_dtypes(include=np.number)
@@ -158,9 +147,9 @@ class Processing:
 
     def above_sea_level(self, sea_level_pressure):
         """
-        - Receives the 'sea_level_pressure' argument, which should be 10.12 dbar
-        - Converts the pressure column to 'float',
-        - Keeps the values that are greater than sea_level_pressure
+        Receives the 'sea_level_pressure' argument, which should be 10.12 dbar
+        Converts the pressure column to 'float',
+        Keeps the values that are greater than sea_level_pressure
         """
         self.data['pressure(dbar)'] = self.data['pressure(dbar)'].astype(float)
         self.data = self.data[self.data['pressure(dbar)'] > sea_level_pressure]
@@ -192,8 +181,8 @@ class Processing:
 
     def lp_filter(self, sample_rate=24.0, time_constant=0.15):
         """
-        - Low-pass filter
-        - Receives the sample_rate and time_constant values
+        Low-pass filter
+        Receives the sample_rate and time_constant values
         """
         wn = (1.0 / time_constant) / (sample_rate * 2.0)
         b, a = signal.butter(2, wn, "low")
@@ -207,10 +196,7 @@ class Processing:
     @staticmethod
     def bin_average(data, window_size, column, column2, lat):
         """
-        :param data: data source
-        :param window_size: bin size
-        :param column: which column to calculate the average
-        :return: returns a dataframe with the results
+        Organize data in average bins.
         """
         # Initialize lists to store the results
         depth = []
@@ -276,7 +262,7 @@ def seconds_to_hms(seconds):
     return f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
 
 
-"""=================================================================================================================="""
+
 """
 Running the functions
 """
